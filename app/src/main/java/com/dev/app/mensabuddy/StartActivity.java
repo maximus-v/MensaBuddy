@@ -18,12 +18,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class StartActivity extends AppCompatActivity {
 
-    private String urlJsonObject = "http://192.168.0.18:8080/BuddyService/mensa?name=AlteMensa";
+    //private String urlJsonObject = "http://10.100.6.211:8080/BuddyService/mensa?name=AlteMensa&datum=20161208";
+    private String urlJsonObject = "http://openmensa.org/api/v2/canteens/79/days/20161208/meals/";
 
     private static String TAG = StartActivity.class.getSimpleName();
     private Button btnMakeObjectRequest;
@@ -32,7 +30,7 @@ public class StartActivity extends AppCompatActivity {
 
     private TextView textView;
 
-    private List<String> mealList;
+    private String jsonResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +47,13 @@ public class StartActivity extends AppCompatActivity {
         btnMakeObjectRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView.setText(makeJsonObjectRequest().get(0));
+                makeJsonObjectRequest();
             }
         });
     }
 
-    private List<String> makeJsonObjectRequest() {
+    private void makeJsonObjectRequest() {
         showProgessDialog();
-
-        mealList = new ArrayList<String>();
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, urlJsonObject, null, new Response.Listener<JSONObject>() {
             @Override
@@ -69,9 +65,12 @@ public class StartActivity extends AppCompatActivity {
                     String zweitesMenue = response.getString("zweitesMenue");
                     String drittesMenue = response.getString("drittesMenue");
 
-                    mealList.add(erstesMenue);
-                    mealList.add(zweitesMenue);
-                    mealList.add(drittesMenue);
+
+                    jsonResponse += erstesMenue + "\n";
+                    jsonResponse += zweitesMenue + "\n";
+                    jsonResponse += drittesMenue + "\n";
+
+                    textView.setText(jsonResponse);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -88,8 +87,6 @@ public class StartActivity extends AppCompatActivity {
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjectRequest);
-
-        return mealList;
     }
 
     private void showProgessDialog() {
