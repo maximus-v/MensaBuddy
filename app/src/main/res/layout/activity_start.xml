@@ -10,10 +10,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.dev.app.mensabuddy.StartActivity">
 
+    <Button
+        android:id="@+id/btnObjRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="Make JSON Object Request" />
+
+    <TextView
+        android:id="@+id/txtResponse"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40px"
+        android:padding="20dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello Christopher and Max!" />
-    <TextView android:id="@+id/result" android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+
 </RelativeLayout>
