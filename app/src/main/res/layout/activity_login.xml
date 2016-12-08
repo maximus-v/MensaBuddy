@@ -11,6 +11,8 @@
     tools:context="com.dev.app.mensabuddy.LoginActivity">
 
     <!-- Login progress -->
+
+    <!-- neu zum test -->
     <ProgressBar
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
