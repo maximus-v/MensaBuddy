@@ -41,7 +41,7 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private TextView t;
     private DistanceCalculator DC = new DistanceCalculator();
-    final List<String> mensen = new ArrayList<String>();
+    final List<String> mensen = new ArrayList<>();
     ArrayAdapter<String> dataAdapter;
 
 
@@ -70,7 +70,7 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
         mensen.add("Siedepunkt");
         mensen.add("UBoot");
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mensen);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mensen);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
 
@@ -115,7 +115,12 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
 
     private double calcDistance (String Mensa){
         Log.i(TAG, "Location services connected.");
-        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        Location location = null;
+        try{
+        location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);}
+        catch (SecurityException e) {
+            Toast.makeText(StartMatchingActivity.this, "" + e.toString(), Toast.LENGTH_SHORT).show();
+        }
 
         if (location == null) {
             // Blank for a moment...
