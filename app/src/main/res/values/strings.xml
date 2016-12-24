@@ -23,5 +23,5 @@
     <string name="btn_stop_location_updates">STOP LOCATION UPDATES</string>
 
     <!-- String related to MainActivity -->
-    <string name="btn_confirm_canteen">Mensa wählen</string>
+    <string name="btn_confirm_canteen">Matching starten</string>
 </resources>

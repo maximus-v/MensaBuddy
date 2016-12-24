@@ -28,7 +28,8 @@
         android:text="@string/btn_confirm_canteen"
         android:padding="5dp"
         android:background="@color/colorAccent"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:id="@+id/matchingBtn" />
 
 
 
