@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class StartMatchingActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, AdapterView.OnItemSelectedListener {
@@ -39,6 +41,10 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private TextView t;
     private DistanceCalculator DC = new DistanceCalculator();
+    final List<String> mensen = new ArrayList<String>();
+    ArrayAdapter<String> dataAdapter;
+
+
 
     //Orte der Mensen
     private HashMap<String, Double> Canteens = new HashMap<>();
@@ -47,17 +53,18 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_matching);
-
+        Button button = (Button) findViewById(R.id.goBtn);
+        final Spinner spinner = (Spinner) findViewById(R.id.mensaSpin);
 
         //Label erstellen
         t=new TextView(this);
         t=(TextView)findViewById(R.id.lblLocation);
 
         //Dropdown erstellen
-        Spinner spinner = (Spinner) findViewById(R.id.mensaSpin);
         spinner.setOnItemSelectedListener(this);
         //Elemente einfügen
-        List<String> mensen = new ArrayList<String>();
+
+
         mensen.add("Alte Mensa");
         mensen.add("Zeltschlösschen");
         mensen.add("Siedepunkt");
@@ -67,6 +74,17 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
 
+        //Button
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //mensen.add(mensen.size(),"TestDummy");
+                //dataAdapter.notifyDataSetChanged();
+                sortSpinner();
+                Toast.makeText(StartMatchingActivity.this, "Button Clicked and list sorted", Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
         //Google API
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -95,7 +113,7 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
         this.calcDistance("Alte Mensa");
     }
 
-    private void calcDistance (String Mensa){
+    private double calcDistance (String Mensa){
         Log.i(TAG, "Location services connected.");
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
@@ -120,9 +138,12 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
             double lat2 = Canteens.get(Mensa+"Lat");
             double lng2 = Canteens.get(Mensa+"Lng");
 
-            String i = DC.calculateDistance(lat1, lat2, lng1, lng2);
-            t.setText(i);
-        };
+            double dis = DC.calculateDistance(lat1, lat2, lng1, lng2);
+            String i = String.valueOf(dis*1000);
+            t.setText(i + " m");
+            return dis;
+        }
+        return 0;
     }
     @Override
     public void onConnectionSuspended(int i) {
@@ -156,5 +177,29 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
 
     }
 
+    private void sortSpinner() {
+        Map<Double, String> sortedMap = new TreeMap<>();
+        double[] indizes = new double[4];
+        indizes[0]=this.calcDistance("Alte Mensa");
+        sortedMap.put(indizes[0], "Alte Mensa");
+        indizes[1]=this.calcDistance("Zeltschlösschen");
+        sortedMap.put(indizes[1], "Zeltschlösschen");
+        indizes[2]=this.calcDistance("Siedepunkt");
+        sortedMap.put(indizes[2], "Siedepunkt");
+        indizes[3]=this.calcDistance("UBoot");
+        sortedMap.put(indizes[3], "UBoot");
+
+        mensen.clear();
+        int i=0;
+        for(Map.Entry<Double,String> entry : sortedMap.entrySet()) {
+
+            mensen.add(i, entry.getValue());
+            i++;
+        }
+        final Spinner spinner = (Spinner) findViewById(R.id.mensaSpin);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mensen);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+    }
 
 }
