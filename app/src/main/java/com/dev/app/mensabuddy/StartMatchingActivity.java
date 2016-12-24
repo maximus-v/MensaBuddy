@@ -123,7 +123,8 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
         }
 
         if (location == null) {
-            // Blank for a moment...
+            Toast.makeText(StartMatchingActivity.this, "No Location detected", Toast.LENGTH_SHORT).show();
+
         }
         else {
             handleNewLocation(location);
@@ -202,7 +203,7 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
             i++;
         }
         final Spinner spinner = (Spinner) findViewById(R.id.mensaSpin);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mensen);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mensen);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
     }
