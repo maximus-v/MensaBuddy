@@ -23,5 +23,12 @@
     <string name="btn_stop_location_updates">STOP LOCATION UPDATES</string>
 
     <!-- String related to MainActivity -->
-    <string name="btn_confirm_canteen">Matching starten</string>
+    <string name="btn_confirm_canteen">Mensa wählen</string>
+
+    <!-- Strings related to PersonalActivity -->
+    <string name="ph_vorname">Vorname</string>
+    <string name="ph_nachname">Nachname</string>
+    <string name="ph_int1">Interesse 1</string>
+    <string name="ph_int2">Interesse 2</string>
+    <string name="ph_int3">Interesse 3</string>
 </resources>

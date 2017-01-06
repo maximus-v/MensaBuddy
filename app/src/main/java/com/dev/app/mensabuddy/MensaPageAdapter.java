@@ -81,7 +81,9 @@ public class MensaPageAdapter extends FragmentPagerAdapter {
             datum = "datum=" + year + month + day;
         }
 
-        urlJsonObject = "http://192.168.0.18:8080/BuddyService/mensa?name=" + mensa + "&" + datum + "";
+        //urlJsonObject = "http://192.168.0.18:8080/BuddyService/mensa?name=" + mensa + "&" + datum + "";
+        //urlJsonObject = "http://10.100.7.205:8080/BuddyService/mensa?name=" + mensa + "&" + datum + "";
+        urlJsonObject = "http://10.100.7.205:8080/BuddyService/mensa?name=AlteMensa&datum=20170106";
 
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Laden ... ");
