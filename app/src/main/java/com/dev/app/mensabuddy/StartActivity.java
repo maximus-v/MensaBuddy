@@ -38,6 +38,11 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+        myDb = new DatabaseHelper(this);
+        //Update Vorschläge bei Start der App
+        //Herausnehmen, wenn Service steht
+        myDb.updateDatum();
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new MensaPageAdapter(getSupportFragmentManager(), StartActivity.this));
 
@@ -53,7 +58,6 @@ public class StartActivity extends AppCompatActivity {
             }
 
         });
-        myDb = new DatabaseHelper(this);
     }
 
     @Override
