@@ -31,6 +31,8 @@ import static com.dev.app.mensabuddy.R.id.button;
 
 public class StartActivity extends AppCompatActivity {
 
+    DatabaseHelper myDb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,7 @@ public class StartActivity extends AppCompatActivity {
             }
 
         });
+        myDb = new DatabaseHelper(this);
     }
 
     @Override

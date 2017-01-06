@@ -37,7 +37,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DateActivity" />
-        <activity android:name=".PersonalActivity"></activity>
+        <activity android:name=".PersonalActivity" />
+        <activity android:name=".MatchingActivity"></activity>
     </application>
 
 </manifest>
