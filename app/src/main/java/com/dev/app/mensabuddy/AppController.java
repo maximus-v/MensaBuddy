@@ -16,6 +16,8 @@ public class AppController extends Application {
     private RequestQueue requestQueue;
     private static AppController instance;
 
+    private String time;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -24,6 +26,14 @@ public class AppController extends Application {
 
     public static synchronized AppController getInstance() {
         return instance;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     public RequestQueue getRequestQueue() {

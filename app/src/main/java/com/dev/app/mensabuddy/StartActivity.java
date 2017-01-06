@@ -3,6 +3,7 @@ package com.dev.app.mensabuddy;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -32,16 +33,32 @@ import static com.dev.app.mensabuddy.R.id.button;
 public class StartActivity extends AppCompatActivity {
 
     DatabaseHelper myDb;
+    AppController appController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+        appController = (AppController) getApplicationContext();
+
         myDb = new DatabaseHelper(this);
         //Update Vorschläge bei Start der App
         //Herausnehmen, wenn Service steht
         myDb.updateDatum();
+
+        //Nachfolgender Code leitet User auf Profil, wenn noch nicht angelegt
+        /*String resultString = "";
+        Cursor result = myDb.getUniqueKey();
+        while (result.moveToNext()) {
+            resultString = Integer.toString(result.getInt(0));
+        }
+        if (resultString.equals("")) {
+            Intent i = new Intent(getApplicationContext(), PersonalActivity.class);
+            startActivity(i);
+        } else {
+            mpa.setId(Integer.parseInt(resultString);
+        }*/
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new MensaPageAdapter(getSupportFragmentManager(), StartActivity.this));

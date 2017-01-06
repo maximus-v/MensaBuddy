@@ -2,6 +2,7 @@ package com.dev.app.mensabuddy;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -26,7 +27,6 @@ public class MensaPageAdapter extends FragmentPagerAdapter {
 
     final int PAGE_COUNT = 3;
     private String tabTitles[] = new String[] {"Alte Mensa", "Zeltmensa", "Siedepunkt" };
-    private String fragmentText = "Text";
     private Context context;
 
     private ProgressDialog progressDialog;
@@ -48,14 +48,18 @@ public class MensaPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        fragmentText = makeJsonObjectRequest(position - 1);
-        return MensaFragment.newInstance(position + 1, fragmentText);
+        return MensaFragment.newInstance(position + 1, makeJsonObjectRequest(position));
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         return tabTitles[position];
     }
+
+
+
+
+    //----------------------------------------------------------------------------------------------
 
     private String makeJsonObjectRequest(int position) {
 
@@ -75,62 +79,24 @@ public class MensaPageAdapter extends FragmentPagerAdapter {
 
         String datum = "";
 
-        if (day < 10) {
-            datum = "datum=" + year + month + "0" + day;
+        if (month < 10) {
+            if (day < 10) {
+                datum = "datum=" + Integer.toString(year) + "0" + Integer.toString(month) + "0" + Integer.toString(day);
+            } else {
+                datum = "datum=" + Integer.toString(year) + "0" + Integer.toString(month) + "" + Integer.toString(day);
+            }
         } else {
-            datum = "datum=" + year + month + day;
+            if (day < 10) {
+                datum = "datum=" + Integer.toString(year) + "" + Integer.toString(month) + "0" + Integer.toString(day);
+            } else {
+                datum = "datum=" + Integer.toString(year) + "" + Integer.toString(month) + "" + Integer.toString(day);
+            }
         }
 
-        //urlJsonObject = "http://192.168.0.18:8080/BuddyService/mensa?name=" + mensa + "&" + datum + "";
+        urlJsonObject = "http://192.168.0.18:8080/BuddyService/mensa?name=" + mensa + "&" + datum + "";
         //urlJsonObject = "http://10.100.7.205:8080/BuddyService/mensa?name=" + mensa + "&" + datum + "";
-        urlJsonObject = "http://10.100.7.205:8080/BuddyService/mensa?name=AlteMensa&datum=20170106";
+        //urlJsonObject = "http://10.100.7.205:8080/BuddyService/mensa?name=AlteMensa&datum=20170106";
 
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Laden ... ");
-        progressDialog.setCancelable(false);
-
-        showProgessDialog();
-
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, urlJsonObject, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d(TAG, response.toString());
-
-                try {
-                    String erstesMenue = response.getString("erstesMenue");
-                    String zweitesMenue = response.getString("zweitesMenue");
-                    String drittesMenue = response.getString("drittesMenue");
-
-
-                    jsonResponse = erstesMenue + "\n\n";
-                    jsonResponse += zweitesMenue + "\n\n";
-                    jsonResponse += drittesMenue + "\n\n";
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    jsonResponse = e.getMessage();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error){
-                jsonResponse = error.getMessage();
-            }
-        });
-        hideProgressDialog();
-        AppController.getInstance().addToRequestQueue(jsonObjectRequest);
-        return jsonResponse;
+        return urlJsonObject;
     }
-
-    private void showProgessDialog() {
-        if (!progressDialog.isShowing()) {
-            progressDialog.show();
-        }
-    }
-
-    private void hideProgressDialog() {
-        if (progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
-    }
-
 }
