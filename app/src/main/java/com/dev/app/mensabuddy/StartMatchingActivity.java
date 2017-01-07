@@ -113,7 +113,7 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
         this.calcDistance("Alte Mensa");
     }
 
-    private double calcDistance (String Mensa){
+    private void calcDistance (String Mensa){
         Log.i(TAG, "Location services connected.");
         Location location = null;
         try{
@@ -132,7 +132,7 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
             double lng1 = location.getLongitude();
 
             //Orte der Mensen zufügen
-            Canteens.put("Alte MensaLat", 51.027199);
+            /*Canteens.put("Alte MensaLat", 51.027199);
             Canteens.put("Alte MensaLng", 13.726550);
             Canteens.put("ZeltschlösschenLat", 51.031318);
             Canteens.put("ZeltschlösschenLng", 13.728419);
@@ -146,10 +146,17 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
 
             double dis = DC.calculateDistance(lat1, lat2, lng1, lng2);
             String i = String.valueOf(dis*1000);
-            t.setText(i + " m");
-            return dis;
+            t.setText(i + " m");*/
+            //return dis;
+
+            String[] sortedCanteens = new String[3];
+            sortedCanteens=DC.getSortedCanteens(lat1, lng1);
+            mensen.clear();
+            mensen.add(sortedCanteens[0]);
+            mensen.add(sortedCanteens[1]);
+            mensen.add(sortedCanteens[2]);
         }
-        return 0;
+        //return 0;
     }
     @Override
     public void onConnectionSuspended(int i) {
@@ -184,7 +191,7 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
     }
 
     private void sortSpinner() {
-        Map<Double, String> sortedMap = new TreeMap<>();
+        /*Map<Double, String> sortedMap = new TreeMap<>();
         double[] indizes = new double[4];
         indizes[0]=this.calcDistance("Alte Mensa");
         sortedMap.put(indizes[0], "Alte Mensa");
@@ -201,7 +208,11 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
 
             mensen.add(i, entry.getValue());
             i++;
-        }
+        }*/
+
+
+        //mensen
+        this.calcDistance("");
         final Spinner spinner = (Spinner) findViewById(R.id.mensaSpin);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mensen);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
