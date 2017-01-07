@@ -10,12 +10,31 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.dev.app.mensabuddy.PersonalActivity">
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/inputVorname"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/ph_vorname"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/inputNachname"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/inputVorname"
+        android:hint="@string/ph_nachname"/>
+
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/inputNachname"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
         android:id="@+id/fakultaetSpinner"
         />
 
@@ -24,10 +43,9 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:layout_below="@+id/fakultaetSpinner"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
         android:id="@+id/inputInt1"
+        android:layout_below="@id/fakultaetSpinner"
         android:hint="@string/ph_int1"/>
 
     <EditText
@@ -35,47 +53,20 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:layout_below="@+id/inputInt1"
-        android:layout_alignLeft="@+id/inputInt1"
-        android:layout_alignStart="@+id/inputInt1"
-        android:layout_marginTop="22dp"
         android:id="@+id/inputInt2"
+        android:layout_below="@id/inputInt1"
+        android:layout_centerHorizontal="true"
         android:hint="@string/ph_int2"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/inputNachname"
-        android:layout_below="@+id/inputVorname"
-        android:layout_alignLeft="@+id/inputInt1"
-        android:layout_alignStart="@+id/inputInt1"
-        android:layout_marginTop="21dp"
-        android:hint="@string/ph_nachname"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:layout_marginTop="21dp"
-        android:id="@+id/inputVorname"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/inputNachname"
-        android:layout_alignStart="@+id/inputNachname"
-        android:hint="@string/ph_vorname"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_marginTop="17dp"
         android:id="@+id/inputInt3"
-        android:layout_below="@+id/inputInt2"
-        android:layout_alignLeft="@+id/inputInt2"
-        android:layout_alignStart="@+id/inputInt2"
+        android:layout_below="@id/inputInt2"
+        android:layout_centerHorizontal="true"
         android:hint="@string/ph_int3"/>
 
     <Button
@@ -83,8 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
         android:id="@+id/saveProfilBtn" />
 
 </RelativeLayout>

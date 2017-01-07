@@ -122,7 +122,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //SELECT mensa, vorschlag, unique
     public Cursor getProfilesById(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor result = db.rawQuery("SELECT * FROM " + PROFILE_TABLE_NAME + " WHERE ID = " + PROFIL_ID_COL, null);
+        //Cursor result = db.rawQuery("SELECT * FROM " + PROFILE_TABLE_NAME + " WHERE ID = " + PROFIL_ID_COL, null);
+        String[] cols = {PROFIL_VORNAME_COL, PROFIL_NACHNAME_COL, PROFIL_FAKULTAET_COL};
+        Cursor result = db.query(PROFILE_TABLE_NAME, cols, "ID = " + id, null, null, null, null);
         return result;
     }
 
