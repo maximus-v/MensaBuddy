@@ -43,6 +43,7 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
     private DistanceCalculator DC = new DistanceCalculator();
     final List<String> mensen = new ArrayList<>();
     ArrayAdapter<String> dataAdapter;
+    Match match;
 
 
 
@@ -92,10 +93,19 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+
+
+
     }
 
     @Override
     protected void onResume(){
+        match = new Match(this);
+
+        if (match.FindFastMatch(2,"Alte Mensa", 1100)==1)
+            {Toast.makeText(this, "it worked", Toast.LENGTH_LONG).show();}
+        else Toast.makeText(this, "didn't work", Toast.LENGTH_LONG).show();
+
         super.onResume();
         mGoogleApiClient.connect();
     }

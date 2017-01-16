@@ -51,7 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 PROFIL_NACHNAME_COL + " TEXT, " + PROFIL_FAKULTAET_COL + " TEXT)");
         //Zeit in "HH:MM" Format, Datum in "YYYY-MM-DD" Format
         db.execSQL("CREATE TABLE " + VORSCHLAG_TABLE_NAME + " (" + VORSCHLAG_ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, " + VORSCHLAG_INITIATOR_COL + " INTEGER, " +
-                VORSCHLAG_MENSA_COL + " TEXT, " + VORSCHLAG_STARTZEIT1_COL + " TEXT, " + VORSCHLAG_STARTZEIT2_COL + " TEXT, " + VORSCHLAG_DATE_COL + " TEXT)");
+                VORSCHLAG_MENSA_COL + " TEXT, " + VORSCHLAG_STARTZEIT1_COL + " INTEGER, " + VORSCHLAG_STARTZEIT2_COL + " INTEGER, " + VORSCHLAG_DATE_COL + " TEXT)");
 
         //INSERT MENSEN
         db.execSQL("INSERT INTO " + MENSA_TABLE_NAME + " VALUES ('AlteMensa', 0)");
@@ -66,11 +66,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + PROFILE_TABLE_NAME + " VALUES (5,'Wade','Wilson','Wirtschaftswissenschaften')");
 
         //INSERT DUMMY-VORSCHLÄGE
-        db.execSQL("INSERT INTO " + VORSCHLAG_TABLE_NAME + " VALUES (1,1,'AlteMensa','11:00','11:30','2017-01-05')");
-        db.execSQL("INSERT INTO " + VORSCHLAG_TABLE_NAME + " VALUES (2,2,'AlteMensa','11:00','11:30','2017-01-05')");
-        db.execSQL("INSERT INTO " + VORSCHLAG_TABLE_NAME + " VALUES (3,3,'AlteMensa','11:30','11:30','2017-01-05')");
-        db.execSQL("INSERT INTO " + VORSCHLAG_TABLE_NAME + " VALUES (4,4,'AlteMensa','11:00','11:30','2017-01-05')");
-        db.execSQL("INSERT INTO " + VORSCHLAG_TABLE_NAME + " VALUES (5,5,'AlteMensa','12:00','13:30','2017-01-05')");
+        db.execSQL("INSERT INTO " + VORSCHLAG_TABLE_NAME + " VALUES (1,1,'AlteMensa',1100,1130,'2017-01-05')");
+        db.execSQL("INSERT INTO " + VORSCHLAG_TABLE_NAME + " VALUES (2,2,'AlteMensa',1100,1130,'2017-01-05')");
+        db.execSQL("INSERT INTO " + VORSCHLAG_TABLE_NAME + " VALUES (3,3,'AlteMensa',1130,1130,'2017-01-05')");
+        db.execSQL("INSERT INTO " + VORSCHLAG_TABLE_NAME + " VALUES (4,4,'AlteMensa',1100,1130,'2017-01-05')");
+        db.execSQL("INSERT INTO " + VORSCHLAG_TABLE_NAME + " VALUES (5,5,'AlteMensa',1200,1330,'2017-01-05')");
     }
 
     @Override
@@ -137,6 +137,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getUniqueKey() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor result = db.rawQuery("SELECT * FROM " + ID_TABLE_NAME, null);
+        return result;
+    }
+
+    //gib Matchvorschläge aus die zeitlich passen
+    public Cursor getTimeMatches(int time1, String Mensa){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] cols = {VORSCHLAG_ID_COL, VORSCHLAG_INITIATOR_COL, VORSCHLAG_MENSA_COL, VORSCHLAG_STARTZEIT1_COL, VORSCHLAG_STARTZEIT2_COL, VORSCHLAG_DATE_COL};
+        //Cursor result = db.query(VORSCHLAG_TABLE_NAME, cols, VORSCHLAG_MENSA_COL + "=" + Mensa, null, null, null, null);
+        //Cursor result = db.rawQuery("SELECT * FROM " + VORSCHLAG_TABLE_NAME, null);
+        Cursor result = db.query(false, VORSCHLAG_TABLE_NAME, cols, time1 + " <= Startzeit2", null, null, null, null, null);
         return result;
     }
 
