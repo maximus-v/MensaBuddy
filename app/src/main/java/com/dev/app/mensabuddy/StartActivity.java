@@ -14,8 +14,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +30,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import static com.dev.app.mensabuddy.R.id.button;
 
@@ -60,12 +65,30 @@ public class StartActivity extends AppCompatActivity {
             mpa.setId(Integer.parseInt(resultString);
         }*/
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new MensaPageAdapter(getSupportFragmentManager(), StartActivity.this));
+        ArrayList<String> items = new ArrayList<>();
+        items.add("Alte Mensa");
+        items.add("Zeltmensa");
+        items.add("Siedepunkt");
+        items.add("Uboot");
+        items.add("GrillCube");
+        items.add("Reichenbachstraße");
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
 
+        ListView listView = (ListView) findViewById(R.id.mensa_list);
+        listView.setAdapter(itemsAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String mensa = parent.getItemAtPosition(position).toString().replaceAll("\\s+","");
+                Intent i = new Intent(getApplicationContext(), MensaMenuActivity.class);
+                i.putExtra("MensaName", mensa);
+                startActivity(i);
+            }
+        });
+
+        /*
         Button button = (Button) findViewById(R.id.mensaBtn);
         button.setOnClickListener(new OnClickListener() {
             @Override
@@ -75,6 +98,7 @@ public class StartActivity extends AppCompatActivity {
             }
 
         });
+        */
     }
 
     @Override

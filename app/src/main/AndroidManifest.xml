@@ -35,7 +35,8 @@
         </activity>
         <activity android:name=".DateActivity" />
         <activity android:name=".PersonalActivity" />
-        <activity android:name=".MatchingActivity"></activity>
+        <activity android:name=".MatchingActivity" />
+        <activity android:name=".MensaMenuActivity"></activity>
     </application>
 
 </manifest>
