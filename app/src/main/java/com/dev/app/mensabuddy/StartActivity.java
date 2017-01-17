@@ -27,6 +27,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.dev.app.mensabuddy.Adapter.MensaAdapter;
+import com.dev.app.mensabuddy.ListViewModel.MensaModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,16 +64,32 @@ public class StartActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), PersonalActivity.class);
             startActivity(i);
         } else {
-            mpa.setId(Integer.parseInt(resultString);
+            appController.setId(Integer.parseInt(resultString);
         }*/
 
+        /*
+        //Hier könnte Ihre ArrayList stehen
         ArrayList<String> items = new ArrayList<>();
         items.add("Alte Mensa");
-        items.add("Zeltmensa");
-        items.add("Siedepunkt");
-        items.add("Uboot");
         items.add("GrillCube");
-        items.add("Reichenbachstraße");
+        items.add("Reichenbachstrasse");
+        items.add("Siedepunkt");
+        items.add("UBoot");
+        items.add("Zeltmensa");
+
+        String favortienMensa = "Zeltmensa";
+
+        //Lösche Mensa von übrigen Mensen
+        if (items.indexOf(favortienMensa) != 0) {
+            //Favoriten-Mensa an zweite Stelle
+            int index = items.indexOf(favortienMensa);
+            items.remove(index);
+            items.add(1, favortienMensa);
+        } else {
+            //Favorit und nächste Mensa sind die selbe
+            items.remove(0);
+            items.add(0, favortienMensa);
+        }
 
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
 
@@ -87,18 +105,22 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        /*
-        Button button = (Button) findViewById(R.id.mensaBtn);
-        button.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), DateActivity.class);
-                startActivity(i);
-            }
-
-        });
         */
+
+        ListView listView = (ListView) findViewById(R.id.mensa_list);
+
+        ArrayList<MensaModel> mensaModels = new ArrayList<>();
+
+        mensaModels.add(new MensaModel("Alte Mensa"));
+        mensaModels.add(new MensaModel("Grillcube"));
+        mensaModels.add(new MensaModel("Reichenbachstrasse"));
+        mensaModels.add(new MensaModel("Siedepunkt"));
+        mensaModels.add(new MensaModel("UBoot"));
+        mensaModels.add(new MensaModel("Zeltmensa"));
+
+        MensaAdapter adapter = new MensaAdapter(mensaModels, getApplicationContext());
+
+        listView.setAdapter(adapter);
     }
 
     @Override

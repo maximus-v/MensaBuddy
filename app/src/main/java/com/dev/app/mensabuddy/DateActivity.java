@@ -39,7 +39,8 @@ public class DateActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                appController.setTime(hour + ":" + minutes);
+                //Changed something
+                appController.setTime(0);
                 Intent i = new Intent(getApplicationContext(), MatchingActivity.class);
                 startActivity(i);
             }

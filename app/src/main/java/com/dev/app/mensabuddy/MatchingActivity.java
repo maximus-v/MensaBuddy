@@ -14,6 +14,6 @@ public class MatchingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_matching);
         appController = (AppController) getApplicationContext();
         TextView matchText = (TextView) findViewById(R.id.matchText);
-        matchText.setText(appController.getTime());
+        matchText.setText(appController.getMensa());
     }
 }

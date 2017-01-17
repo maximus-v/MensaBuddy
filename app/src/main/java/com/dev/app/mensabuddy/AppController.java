@@ -16,7 +16,9 @@ public class AppController extends Application {
     private RequestQueue requestQueue;
     private static AppController instance;
 
-    private String time;
+    private int time;
+    private String mensa;
+    private int id;
 
     @Override
     public void onCreate() {
@@ -28,12 +30,28 @@ public class AppController extends Application {
         return instance;
     }
 
-    public void setTime(String time) {
+    public void setTime(int time) {
         this.time = time;
     }
 
-    public String getTime() {
+    public int getTime() {
         return time;
+    }
+
+    public String getMensa() {
+        return mensa;
+    }
+
+    public void setMensa(String mensa) {
+        this.mensa = mensa;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public RequestQueue getRequestQueue() {

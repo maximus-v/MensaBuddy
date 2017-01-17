@@ -15,15 +15,4 @@
         android:layout_height="wrap_content"
         android:id="@+id/mensa_list" />
 
-    <!--
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_confirm_canteen"
-        android:padding="5dp"
-        android:background="@color/colorAccent"
-        android:textColor="@android:color/white"
-        android:id="@+id/mensaBtn" />
-    -->
-
 </LinearLayout>
