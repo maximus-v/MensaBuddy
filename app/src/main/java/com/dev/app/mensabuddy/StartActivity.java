@@ -95,16 +95,6 @@ public class StartActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.mensa_list);
         listView.setAdapter(itemsAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String mensa = parent.getItemAtPosition(position).toString().replaceAll("\\s+","");
-                Intent i = new Intent(getApplicationContext(), MensaMenuActivity.class);
-                i.putExtra("MensaName", mensa);
-                startActivity(i);
-            }
-        });
         */
 
         ListView listView = (ListView) findViewById(R.id.mensa_list);
@@ -121,6 +111,17 @@ public class StartActivity extends AppCompatActivity {
         MensaAdapter adapter = new MensaAdapter(mensaModels, getApplicationContext());
 
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MensaModel model = (MensaModel) parent.getItemAtPosition(position);
+                String mensa = model.getName().replaceAll("\\s+","");
+                Intent i = new Intent(getApplicationContext(), MensaMenuActivity.class);
+                i.putExtra("MensaName", mensa);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
