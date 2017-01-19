@@ -102,7 +102,7 @@ public class StartMatchingActivity extends FragmentActivity implements GoogleApi
     protected void onResume(){
         match = new Match(this);
 
-        if (match.FindFastMatch(2,"Alte Mensa", 1100)==1)
+        if (match.findFastMatch(2,"Alte Mensa", 1100)==1)
             {Toast.makeText(this, "it worked", Toast.LENGTH_LONG).show();}
         else Toast.makeText(this, "didn't work", Toast.LENGTH_LONG).show();
 
