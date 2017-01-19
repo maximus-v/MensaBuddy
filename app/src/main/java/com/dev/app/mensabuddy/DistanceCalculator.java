@@ -9,7 +9,7 @@ public class DistanceCalculator {
 
     private double distance=0;
     private HashMap<String, Double> canteens = new HashMap<>();
-    String[] ergebnis = new String[3];
+    String[] ergebnis = new String[6];
 
     public DistanceCalculator (){
 
@@ -21,6 +21,12 @@ public class DistanceCalculator {
         canteens.put("SiedepunktLng", 13.738530);
         canteens.put("UBootLat", 51.030100);
         canteens.put("UBootLng", 13.729319);
+        canteens.put("GrillcubeLat", 51.028558);
+        canteens.put("GrillcubeLng", 13.728754);
+        canteens.put("ReichenbachstrasseLat", 51.034214);
+        canteens.put("ReichenbachstrasseLng", 13.734010);
+        canteens.put("UBootLat", 51.030256);
+        canteens.put("UBootLng", 13.729224);
     }
 
     public double calculateDistance (double lat1,double lat2,double long1,double long2){
@@ -42,16 +48,29 @@ public class DistanceCalculator {
         Mensa alteMensa = new Mensa("Alte Mensa");
         Mensa siedepunkt = new Mensa("Siedepunkt");
         Mensa zelt = new Mensa("Zeltschlösschen");
+        Mensa grill = new Mensa("Grillcube");
+        Mensa reichenbachstrasse = new Mensa("Reichenbachstrasse");
+        Mensa uBoot = new Mensa("UBoot");
+
         alteMensa.setDistance(this.calculateDistance(lat, canteens.get("Alte MensaLat"), lng, canteens.get("Alte MensaLng")));
         siedepunkt.setDistance(this.calculateDistance(lat, canteens.get("SiedepunktLat"), lng, canteens.get("SiedepunktLng")));
         zelt.setDistance(this.calculateDistance(lat, canteens.get("ZeltschlösschenLat"), lng, canteens.get("ZeltschlösschenLng")));
+        grill.setDistance(this.calculateDistance(lat, canteens.get("GrillcubeLat"), lng, canteens.get("GrillcubeLng")));
+        reichenbachstrasse.setDistance(this.calculateDistance(lat, canteens.get("ReichenbachstrasseLat"), lng, canteens.get("ReichenbachstrasseLng")));
+        uBoot.setDistance(this.calculateDistance(lat, canteens.get("UBootLat"), lng, canteens.get("UBootLng")));
         result.add(0, alteMensa);
         result.add(1, siedepunkt);
         result.add(2, zelt);
+        result.add(3, grill);
+        result.add(4, reichenbachstrasse);
+        result.add(5, uBoot);
         Collections.sort(result);
         ergebnis[0]=result.get(0).toString();
         ergebnis[1]=result.get(1).toString();
         ergebnis[2]=result.get(2).toString();
+        ergebnis[3]=result.get(3).toString();
+        ergebnis[4]=result.get(4).toString();
+        ergebnis[5]=result.get(5).toString();
         return ergebnis;
     }
 

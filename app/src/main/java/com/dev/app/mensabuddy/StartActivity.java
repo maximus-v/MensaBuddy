@@ -220,6 +220,9 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
             mensaModels.add(0, new MensaModel(sortedCanteens[0]));
             mensaModels.add(1, new MensaModel(sortedCanteens[1]));
             mensaModels.add(2, new MensaModel(sortedCanteens[2]));
+            mensaModels.add(2, new MensaModel(sortedCanteens[3]));
+            mensaModels.add(2, new MensaModel(sortedCanteens[4]));
+            mensaModels.add(2, new MensaModel(sortedCanteens[5]));
 
             return true;
         }
