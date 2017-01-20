@@ -67,8 +67,8 @@ public class MensaMenuActivity extends AppCompatActivity {
     }
 
     private String createServiceUrl(String mensa) {
-        urlJsonObject = "http://192.168.0.18:8080/MensaBuddyServer/webapi/mensa/" + mensa;
-        //urlJsonObject = "http://10.100.7.205:8080/MensaBuddyServer/webapi/mensa/" + mensa;
+        //urlJsonObject = "http://192.168.0.18:8080/MensaBuddyServer/webapi/mensa/" + mensa;
+        urlJsonObject = "http://10.100.3.120:8080/MensaBuddyServer/webapi/mensa/" + mensa;
         return urlJsonObject;
     }
 

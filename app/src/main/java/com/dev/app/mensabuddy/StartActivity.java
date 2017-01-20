@@ -55,6 +55,7 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
     private DistanceCalculator DC = new DistanceCalculator();
     private Match match;
     private ArrayList<MensaModel> mensaModels = new ArrayList<>();
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,11 +119,11 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
                 .addApi(LocationServices.API)
                 .build();
 
-        ListView listView = (ListView) findViewById(R.id.mensa_list);
+        listView = (ListView) findViewById(R.id.mensa_list);
 
 
 
-        mensaModels.add(new MensaModel("Alte Mensa"));
+      /*  mensaModels.add(new MensaModel("Alte Mensa"));
         mensaModels.add(new MensaModel("Grillcube"));
         mensaModels.add(new MensaModel("Reichenbachstrasse"));
         mensaModels.add(new MensaModel("Siedepunkt"));
@@ -131,7 +132,7 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
 
         MensaAdapter adapter = new MensaAdapter(mensaModels, getApplicationContext());
 
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);*/
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -214,15 +215,19 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
             double lat1 = location.getLatitude();
             double lng1 = location.getLongitude();
 
-            String[] sortedCanteens = new String[3];
+            String[] sortedCanteens = new String[5];
             sortedCanteens=DC.getSortedCanteens(lat1, lng1);
             mensaModels.clear();
             mensaModels.add(0, new MensaModel(sortedCanteens[0]));
             mensaModels.add(1, new MensaModel(sortedCanteens[1]));
             mensaModels.add(2, new MensaModel(sortedCanteens[2]));
-            mensaModels.add(2, new MensaModel(sortedCanteens[3]));
-            mensaModels.add(2, new MensaModel(sortedCanteens[4]));
-            mensaModels.add(2, new MensaModel(sortedCanteens[5]));
+            mensaModels.add(3, new MensaModel(sortedCanteens[3]));
+            mensaModels.add(4, new MensaModel(sortedCanteens[4]));
+            mensaModels.add(5, new MensaModel(sortedCanteens[5]));
+
+            MensaAdapter adapter = new MensaAdapter(mensaModels, getApplicationContext());
+
+            listView.setAdapter(adapter);
 
             return true;
         }
