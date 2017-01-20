@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -66,30 +67,8 @@ public class MensaMenuActivity extends AppCompatActivity {
     }
 
     private String createServiceUrl(String mensa) {
-
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        String datum = "";
-
-        if (month < 10) {
-            if (day < 10) {
-                datum = "datum=" + Integer.toString(year) + "0" + Integer.toString(month) + "0" + Integer.toString(day);
-            } else {
-                datum = "datum=" + Integer.toString(year) + "0" + Integer.toString(month) + "" + Integer.toString(day);
-            }
-        } else {
-            if (day < 10) {
-                datum = "datum=" + Integer.toString(year) + "" + Integer.toString(month) + "0" + Integer.toString(day);
-            } else {
-                datum = "datum=" + Integer.toString(year) + "" + Integer.toString(month) + "" + Integer.toString(day);
-            }
-        }
-
-        urlJsonObject = "http://192.168.0.18:8080/BuddyService/mensa?name=" + mensa + "&" + datum + "";
-        //urlJsonObject = "http://10.100.7.205:8080/BuddyService/mensa?name=" + mensa + "&" + datum + "";
+        urlJsonObject = "http://192.168.0.18:8080/MensaBuddyServer/webapi/mensa/" + mensa;
+        //urlJsonObject = "http://10.100.7.205:8080/MensaBuddyServer/webapi/mensa/" + mensa;
         return urlJsonObject;
     }
 
@@ -104,13 +83,14 @@ public class MensaMenuActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
 
                 try {
-                    String erstesMenue = response.getString("erstesMenue");
-                    String zweitesMenue = response.getString("zweitesMenue");
-                    String drittesMenue = response.getString("drittesMenue");
 
-                    itemList.add(erstesMenue);
-                    itemList.add(zweitesMenue);
-                    itemList.add(drittesMenue);
+                    JSONArray gerichte = response.getJSONArray("gerichte");
+
+                    for (int i = 0; i < gerichte.length(); i++) {
+                        JSONObject essen = (JSONObject) gerichte.get(i);
+                        String bezeichnung = essen.getString("bezeichnung");
+                        itemList.add(bezeichnung);
+                    }
 
                     ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, itemList);
                     listView.setAdapter(itemsAdapter);
