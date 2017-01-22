@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dev.app.mensabuddy">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -36,7 +37,22 @@
         <activity android:name=".DateActivity" />
         <activity android:name=".PersonalActivity" />
         <activity android:name=".MatchingActivity" />
-        <activity android:name=".MensaMenuActivity"></activity>
+        <activity android:name=".MensaMenuActivity" />
+
+        <service android:name=".FirebaseIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".FirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

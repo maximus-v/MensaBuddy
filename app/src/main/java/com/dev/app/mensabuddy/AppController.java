@@ -19,6 +19,7 @@ public class AppController extends Application {
     private int time;
     private String mensa;
     private int id;
+    private String firebaseToken;
 
     @Override
     public void onCreate() {
@@ -70,5 +71,13 @@ public class AppController extends Application {
         if (requestQueue != null) {
             requestQueue.cancelAll(tag);
         }
+    }
+
+    public void setFirebaseToken(String Token){
+        this.firebaseToken=Token;
+    }
+
+    public String getFirebaseToken(){
+        return this.firebaseToken;
     }
 }
