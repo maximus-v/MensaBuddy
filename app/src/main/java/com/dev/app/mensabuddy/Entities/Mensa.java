@@ -1,4 +1,4 @@
-package com.dev.app.mensabuddy;
+package com.dev.app.mensabuddy.Entities;
 
 /**
  * Created by chris on 07.01.2017.

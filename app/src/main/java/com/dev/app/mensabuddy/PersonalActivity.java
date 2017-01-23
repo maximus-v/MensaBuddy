@@ -1,27 +1,27 @@
 package com.dev.app.mensabuddy;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.dev.app.mensabuddy.Entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.R.attr.id;
-
 public class PersonalActivity extends AppCompatActivity {
 
     Spinner fakultaetSpinner;
-    TextView vornameInp, nachnameInp, int1Inp, int2Inp, int3Inp;
+    EditText vornameInp, nachnameInp, int1Inp, int2Inp, int3Inp, studiumInp, telefonInp;
     DatabaseHelper myDb;
+    User user;
+    AppController appController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +29,15 @@ public class PersonalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_personal);
 
         myDb = new DatabaseHelper(this);
+        appController = (AppController) getApplicationContext();
 
-        vornameInp = (TextView) findViewById(R.id.inputVorname);
-        nachnameInp = (TextView) findViewById(R.id.inputNachname);
-        int1Inp = (TextView) findViewById(R.id.inputInt1);
-        int2Inp = (TextView) findViewById(R.id.inputInt2);
-        int3Inp = (TextView) findViewById(R.id.inputInt3);
+        vornameInp = (EditText) findViewById(R.id.inputVorname);
+        nachnameInp = (EditText) findViewById(R.id.inputNachname);
+        int1Inp = (EditText) findViewById(R.id.inputInt1);
+        int2Inp = (EditText) findViewById(R.id.inputInt2);
+        int3Inp = (EditText) findViewById(R.id.inputInt3);
+        studiumInp = (EditText) findViewById(R.id.inputStudium);
+        telefonInp = (EditText) findViewById(R.id.inputTelefon);
 
         fakultaetSpinner = (Spinner) findViewById(R.id.fakultaetSpinner);
 
@@ -63,18 +66,15 @@ public class PersonalActivity extends AppCompatActivity {
 
         //Überprüfe, ob Profildaten vorliegen anhand der ID.
         //Wenn ja, dann fülle Formular aus
-        if (0 == 1) {
-            Cursor profil = myDb.getProfilesById(3);
+        if (myDb.getProfilId() > 0) {
+            user = myDb.getProfil();
+            vornameInp.setText(user.getVorname());
+            nachnameInp.setText(user.getNachname());
 
-            if (profil.moveToNext()) {
-                vornameInp.setText(profil.getString(0));
-                nachnameInp.setText(profil.getString(1));
-
-                String fakulaet = profil.getString(2);
-                if (!fakulaet.equals(null)) {
-                    int spinnerPosition = adapter.getPosition(fakulaet);
-                    fakultaetSpinner.setSelection(spinnerPosition);
-                }
+            String fakulaet = user.getFakultaet();
+            if (!fakulaet.equals(null)) {
+                int spinnerPosition = adapter.getPosition(fakulaet);
+                fakultaetSpinner.setSelection(spinnerPosition);
             }
         }
 
@@ -88,18 +88,30 @@ public class PersonalActivity extends AppCompatActivity {
                     nachnameInp.setError(("Benötigt"));
                 } else {
                     //Überprüfe ob angelegt oder aktualisiert wird, anhand der ID
-                    if (0 == 1) {
-                        //myDb.updateProfile(1, vornameInp.getText().toString(),
-                        //        nachnameInp.getText().toString(), fakultaetSpinner.getSelectedItem().toString());
-                        Toast.makeText(getApplicationContext(), "Geupdated: " +
-                                vornameInp.getText().toString() + nachnameInp.getText().toString() +
-                                fakultaetSpinner.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+                    if (myDb.getProfilId() > 0) {
+                        //TODO Hier müssen wir noch die Datenbank mit den Eingaben abgleichen
+                        user.setVorname(vornameInp.getText().toString());
+                        user.setNachname(nachnameInp.getText().toString());
+                        user.setFakultaet(fakultaetSpinner.getSelectedItem().toString());
+                        user.setStudiengang(studiumInp.getText().toString());
+                        user.setInteresse1(int1Inp.getText().toString());
+                        user.setInteresse2(int3Inp.getText().toString());
+                        user.setInteresse3(int3Inp.getText().toString());
+                        user.setTelefon(telefonInp.getText().toString());
+                        user.setToken(appController.getFirebaseToken());
+                        myDb.updateProfile(user);
+                        Toast.makeText(getApplicationContext(), "Erfolgreich aktualisiert!", Toast.LENGTH_SHORT).show();
                     } else {
-                        //myDb.insertProfile(vornameInp.getText().toString(),
-                        //        nachnameInp.getText().toString(), fakultaetSpinner.getSelectedItem().toString());
-                        Toast.makeText(getApplicationContext(), "Eingefügt: " +
-                                vornameInp.getText().toString() + nachnameInp.getText().toString() +
-                                fakultaetSpinner.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+                        user.setVorname(vornameInp.getText().toString());
+                        user.setNachname(nachnameInp.getText().toString());
+                        user.setFakultaet(fakultaetSpinner.getSelectedItem().toString());
+                        user.setStudiengang(studiumInp.getText().toString());
+                        user.setInteresse1(int1Inp.getText().toString());
+                        user.setInteresse2(int3Inp.getText().toString());
+                        user.setInteresse3(int3Inp.getText().toString());
+                        user.setTelefon(telefonInp.getText().toString());
+                        user.setToken(appController.getFirebaseToken());
+                        Toast.makeText(getApplicationContext(), "Erfolgreich gespeichert!", Toast.LENGTH_LONG).show();
                     }
                     Intent i = new Intent(getApplicationContext(), StartActivity.class);
                     startActivity(i);

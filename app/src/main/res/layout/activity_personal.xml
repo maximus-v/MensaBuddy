@@ -44,8 +44,18 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:layout_centerHorizontal="true"
-        android:id="@+id/inputInt1"
+        android:id="@+id/inputStudium"
         android:layout_below="@id/fakultaetSpinner"
+        android:hint="Studiengang"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/inputInt1"
+        android:layout_below="@id/inputStudium"
         android:hint="@string/ph_int1"/>
 
     <EditText
@@ -68,6 +78,16 @@
         android:layout_below="@id/inputInt2"
         android:layout_centerHorizontal="true"
         android:hint="@string/ph_int3"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/inputTelefon"
+        android:layout_below="@id/inputInt3"
+        android:layout_centerHorizontal="true"
+        android:hint="Telefonnummer"/>
 
     <Button
         android:text="Speichern"

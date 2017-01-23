@@ -1,5 +1,7 @@
 package com.dev.app.mensabuddy;
 
+import com.dev.app.mensabuddy.Entities.Mensa;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

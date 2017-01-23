@@ -16,9 +16,10 @@ public class AppController extends Application {
     private RequestQueue requestQueue;
     private static AppController instance;
 
-    private int time;
-    private String mensa;
     private int id;
+    private String startzeit1;
+    private String startzeit2;
+    private String mensa;
     private String firebaseToken;
 
     @Override
@@ -31,12 +32,20 @@ public class AppController extends Application {
         return instance;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setStartzeit1(String zeit) {
+        this.startzeit1 = zeit;
     }
 
-    public int getTime() {
-        return time;
+    public String getStartzeit1() {
+        return startzeit1;
+    }
+
+    public void setStartzeit2(String zeit) {
+        this.startzeit2 = zeit;
+    }
+
+    public String getStartzeit2() {
+        return startzeit2;
     }
 
     public String getMensa() {
@@ -53,6 +62,14 @@ public class AppController extends Application {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setFirebaseToken(String Token){
+        this.firebaseToken=Token;
+    }
+
+    public String getFirebaseToken(){
+        return this.firebaseToken;
     }
 
     public RequestQueue getRequestQueue() {
@@ -73,11 +90,4 @@ public class AppController extends Application {
         }
     }
 
-    public void setFirebaseToken(String Token){
-        this.firebaseToken=Token;
-    }
-
-    public String getFirebaseToken(){
-        return this.firebaseToken;
-    }
 }

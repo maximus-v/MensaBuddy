@@ -1,7 +1,5 @@
 package com.dev.app.mensabuddy.ListViewModel;
 
-import com.dev.app.mensabuddy.Mensa;
-
 /**
  * Created by Max on 17.01.2017.
  */
