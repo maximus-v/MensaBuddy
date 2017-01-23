@@ -53,7 +53,6 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
     public static final String TAG = StartMatchingActivity.class.getSimpleName();
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private DistanceCalculator DC = new DistanceCalculator();
-    private Match match;
     private ArrayList<MensaModel> mensaModels = new ArrayList<>();
     private ListView listView;
 
@@ -67,13 +66,39 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
         myDb = new DatabaseHelper(this);
 
         //Nachfolgender Code leitet User auf Profil, wenn noch nicht angelegt
-        int userId = myDb.getProfilId();
-        if (userId == 0) {
+        int id = myDb.getProfilId();
+        if (id == 0) {
             Intent i = new Intent(getApplicationContext(), PersonalActivity.class);
             startActivity(i);
         } else {
-            appController.setId(userId);
+            appController.setId(id);
         }
+
+        /*
+        //Hier könnte Ihre ArrayList stehen
+        ArrayList<String> items = new ArrayList<>();
+        items.add("Alte Mensa");
+        items.add("GrillCube");
+        items.add("Reichenbachstrasse");
+        items.add("Siedepunkt");
+        items.add("UBoot");
+        items.add("Zeltmensa");
+        String favortienMensa = "Zeltmensa";
+        //Lösche Mensa von übrigen Mensen
+        if (items.indexOf(favortienMensa) != 0) {
+            //Favoriten-Mensa an zweite Stelle
+            int index = items.indexOf(favortienMensa);
+            items.remove(index);
+            items.add(1, favortienMensa);
+        } else {
+            //Favorit und nächste Mensa sind die selbe
+            items.remove(0);
+            items.add(0, favortienMensa);
+        }
+        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        ListView listView = (ListView) findViewById(R.id.mensa_list);
+        listView.setAdapter(itemsAdapter);
+        */
 
         //Google API
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -83,6 +108,18 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
                 .build();
 
         listView = (ListView) findViewById(R.id.mensa_list);
+
+
+
+        mensaModels.add(new MensaModel("Alte Mensa"));
+        mensaModels.add(new MensaModel("Grillcube"));
+        mensaModels.add(new MensaModel("Reichenbachstrasse"));
+        mensaModels.add(new MensaModel("Siedepunkt"));
+        mensaModels.add(new MensaModel("UBoot"));
+        mensaModels.add(new MensaModel("Zeltmensa"));
+
+        MensaAdapter adapter = new MensaAdapter(mensaModels, getApplicationContext());
+        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -99,7 +136,6 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     protected void onResume(){
         /*match = new Match(this);
-
         if (match.findFastMatch(2,"Alte Mensa", 1100)==1)
         {Toast.makeText(this, "it worked", Toast.LENGTH_LONG).show();}
         else Toast.makeText(this, "didn't work", Toast.LENGTH_LONG).show();*/
@@ -168,17 +204,12 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
             String[] sortedCanteens = new String[5];
             sortedCanteens=DC.getSortedCanteens(lat1, lng1);
             mensaModels.clear();
-            for (int i = 0; i <sortedCanteens.length; i++) {
-                mensaModels.add(i, new MensaModel(sortedCanteens[i]));
-            }
-            /*
             mensaModels.add(0, new MensaModel(sortedCanteens[0]));
             mensaModels.add(1, new MensaModel(sortedCanteens[1]));
             mensaModels.add(2, new MensaModel(sortedCanteens[2]));
             mensaModels.add(3, new MensaModel(sortedCanteens[3]));
             mensaModels.add(4, new MensaModel(sortedCanteens[4]));
             mensaModels.add(5, new MensaModel(sortedCanteens[5]));
-            */
 
             MensaAdapter adapter = new MensaAdapter(mensaModels, getApplicationContext());
 
