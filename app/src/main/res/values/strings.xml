@@ -31,4 +31,8 @@
     <string name="ph_int1">Interesse 1</string>
     <string name="ph_int2">Interesse 2</string>
     <string name="ph_int3">Interesse 3</string>
+
+    <!-- Strings related to MatchPresentationActivity -->
+    <string name="btn_confirm_match">Annehmen</string>
+    <string name="btn_reject_match">Ablehnen</string>
 </resources>

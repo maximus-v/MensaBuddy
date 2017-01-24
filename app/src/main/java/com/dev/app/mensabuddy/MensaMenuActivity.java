@@ -96,14 +96,14 @@ public class MensaMenuActivity extends AppCompatActivity {
                     listView.setAdapter(itemsAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Fehler: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Ein Fehler ist aufgetreten, versuche es bitte nochmal.", Toast.LENGTH_LONG).show();
                 }
                 hideProgressDialog();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Fehler: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Anscheinend bist du nicht mit dem Internet verbunden.", Toast.LENGTH_LONG).show();
                 hideProgressDialog();
             }
         });

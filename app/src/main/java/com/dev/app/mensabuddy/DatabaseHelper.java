@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.dev.app.mensabuddy.Entities.User;
 import com.dev.app.mensabuddy.Entities.Vorschlag;
@@ -17,6 +18,8 @@ import java.util.Calendar;
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+
+    public final String TAG = DatabaseHelper.class.getSimpleName();
 
     public static final String DATABASE_NAME = "mensabuddy.db";
     //MENSA-TABELLE
@@ -194,11 +197,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(VORSCHLAG_ID_COL, vorschlag.getId());
         contentValues.put(VORSCHLAG_MENSA_COL, vorschlag.getMensa());
+        contentValues.put(VORSCHLAG_EIGENE_ID_COL, vorschlag.getEigeneId());
         contentValues.put(VORSCHLAG_STARTZEIT1_COL, vorschlag.getStartzeit1());
         contentValues.put(VORSCHLAG_STARTZEIT2_COL, vorschlag.getStartzeit2());
         contentValues.put(VORSCHLAG_DATE_COL, vorschlag.getDatum());
         contentValues.put(VORSCHLAG_ANDERE_ID_COL, vorschlag.getAndereId());
         contentValues.put(VORSCHLAG_NAME_COL, vorschlag.getName());
+        contentValues.put(VORSCHLAG_TELEFON_COL, vorschlag.getTelefon());
         contentValues.put(VORSCHLAG_CONF1_COL, vorschlag.getConf1());
         contentValues.put(VORSCHLAG_CONF2_COL, vorschlag.getConf2());
         contentValues.put(VORSCHLAG_PROZENT_COL, vorschlag.getProzent());
@@ -234,18 +239,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor result = db.rawQuery("SELECT * FROM " + VORSCHLAG_TABLE_NAME, null);
 
         if (result.moveToNext()) {
-            vorschlag.setId(result.getInt(0));
-            vorschlag.setMensa(result.getString(1));
-            vorschlag.setEigeneId(result.getInt(2));
-            vorschlag.setStartzeit1(result.getString(3));
-            vorschlag.setStartzeit2(result.getString(4));
-            vorschlag.setDatum(result.getString(5));
-            vorschlag.setAndereId(result.getInt(6));
-            vorschlag.setName(result.getString(7));
-            vorschlag.setConf1(result.getInt(8));
-            vorschlag.setConf2(result.getInt(9));
-            vorschlag.setProzent(result.getInt(10));
-            vorschlag.setZeit(result.getString(11));
+
+            if (result.getInt(0) > 0) {
+                Log.d(TAG, "getVorschlag: Result > 0");
+                vorschlag.setId(result.getInt(0));
+                vorschlag.setMensa(result.getString(1));
+                vorschlag.setEigeneId(result.getInt(2));
+                vorschlag.setStartzeit1(result.getString(3));
+                vorschlag.setStartzeit2(result.getString(4));
+                vorschlag.setDatum(result.getString(5));
+                vorschlag.setAndereId(result.getInt(6));
+                vorschlag.setName(result.getString(7));
+                vorschlag.setTelefon(result.getString(8));
+                vorschlag.setConf1(result.getInt(9));
+                vorschlag.setConf2(result.getInt(10));
+                vorschlag.setProzent(result.getInt(11));
+                vorschlag.setZeit(result.getString(12));
+            } else {
+                Log.d(TAG, "getVorschlag: Result < 0");
+                vorschlag = null;
+            }
         }
 
         return vorschlag;

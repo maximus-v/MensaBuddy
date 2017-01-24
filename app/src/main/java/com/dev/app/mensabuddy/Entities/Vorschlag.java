@@ -14,6 +14,7 @@ public class Vorschlag {
     private String datum;
     private int andereId;
     private String name;
+    private String telefon;
     private int conf1;
     private int conf2;
     private int prozent;
@@ -86,6 +87,14 @@ public class Vorschlag {
         this.name = name;
     }
 
+    public String getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
+    }
+
     public int getConf1() {
         return conf1;
     }
@@ -116,5 +125,24 @@ public class Vorschlag {
 
     public void setZeit(String zeit) {
         this.zeit = zeit;
+    }
+
+    @Override
+    public String toString() {
+        return "Vorschlag{" +
+                "id=" + id +
+                ", mensa='" + mensa + '\'' +
+                ", eigeneId=" + eigeneId +
+                ", startzeit1='" + startzeit1 + '\'' +
+                ", startzeit2='" + startzeit2 + '\'' +
+                ", datum='" + datum + '\'' +
+                ", andereId=" + andereId +
+                ", name='" + name + '\'' +
+                ", telefon='" + telefon + '\'' +
+                ", conf1=" + conf1 +
+                ", conf2=" + conf2 +
+                ", prozent=" + prozent +
+                ", zeit='" + zeit + '\'' +
+                '}';
     }
 }
