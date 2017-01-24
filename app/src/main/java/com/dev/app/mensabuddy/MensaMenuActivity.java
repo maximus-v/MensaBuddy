@@ -92,7 +92,7 @@ public class MensaMenuActivity extends AppCompatActivity {
                         itemList.add(bezeichnung);
                     }
 
-                    ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, itemList);
+                    ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.menu_item, itemList);
                     listView.setAdapter(itemsAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
