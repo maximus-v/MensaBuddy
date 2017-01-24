@@ -14,6 +14,11 @@ import static com.dev.app.mensabuddy.StartActivity.TAG;
 public class FirebaseIDService extends FirebaseInstanceIdService{
 
 
+    public void getToken(){
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "Refreshed token: " + refreshedToken);
+    }
+
     @Override
     public void onTokenRefresh(){
         // Get updated InstanceID token.

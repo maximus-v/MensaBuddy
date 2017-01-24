@@ -61,6 +61,10 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+        FirebaseIDService Service = new FirebaseIDService();
+        Service.getToken();
+
+
         appController = (AppController) getApplicationContext();
 
         myDb = new DatabaseHelper(this);
