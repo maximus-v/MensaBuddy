@@ -130,7 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public User getProfil() {
         SQLiteDatabase db = this.getWritableDatabase();
         User user = new User();
-        Cursor result = db.rawQuery("SELECT * FROM " + PROFILE_TABLE_NAME, null);
+        Cursor result = db.rawQuery("SELECT * FROM " + PROFILE_TABLE_NAME + " ORDER BY id DESC", null);
 
         if (result.moveToNext()) {
             user.setId(result.getInt(0));

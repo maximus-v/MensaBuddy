@@ -3,7 +3,6 @@ package com.dev.app.mensabuddy;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MatchingActivity extends AppCompatActivity {
 

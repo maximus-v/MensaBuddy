@@ -116,7 +116,7 @@ public class PersonalActivity extends AppCompatActivity {
                         user = new User();
                         //TODO Hier müssen wir noch die Datenbank mit den Eingaben abgleichen
                         user.setId(appController.getId());
-                        user.setVorname(/*vornameInp.getText().toString()*/"Hallo");
+                        user.setVorname(vornameInp.getText().toString());
                         user.setNachname(nachnameInp.getText().toString());
                         user.setFakultaet(fakultaetSpinner.getSelectedItem().toString());
                         user.setStudiengang(studiumInp.getText().toString());
@@ -181,7 +181,7 @@ public class PersonalActivity extends AppCompatActivity {
 
                         AppController.getInstance().addToRequestQueue(request);
 
-                        Toast.makeText(getApplicationContext(), "Erfolgreich gespeichert!" + " " + user.getId(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Erfolgreich gespeichert!", Toast.LENGTH_LONG).show();
                     }
                 }
             }
