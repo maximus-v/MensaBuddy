@@ -43,7 +43,6 @@ public class MatchingActivity extends AppCompatActivity {
 
         if (myDb.getVorschlag().getName() == null) {
             Log.d(TAG, "onCreate: Vorschlag = null");
-            message.setVisibility(View.VISIBLE);
             makeMatchingRequest();
         } else {
             Log.d(TAG, "onCreate: Vorschlag vorhanden");
@@ -89,6 +88,19 @@ public class MatchingActivity extends AppCompatActivity {
                             vorschlag.setDatum("2017-01-24");
                             vorschlag.setConf1(0);
                             vorschlag.setConf2(0);
+
+                            if (vorschlag.getId() != 0) {
+                                //Starte neue Aktivität
+                                //Schreibe in Datenbank
+                                Intent i = new Intent(getApplicationContext(), MatchPresentationActivity.class);
+                                i.putExtra("MensaName", vorschlag.getMensa());
+                                i.putExtra("Name", vorschlag.getName());
+                                i.putExtra("Zeit", vorschlag.getZeit());
+                                i.putExtra("Telefon", vorschlag.getTelefon());
+                                startActivity(i);
+                            } else {
+                                message.setVisibility(View.VISIBLE);
+                            }
 
                             Log.d(TAG, "onResponse: " + vorschlag.toString());
                         } catch (JSONException e) {
