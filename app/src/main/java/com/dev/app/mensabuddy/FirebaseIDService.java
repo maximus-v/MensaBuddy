@@ -23,7 +23,7 @@ public class FirebaseIDService extends FirebaseInstanceIdService{
         // store new FirebaseToken in AppController
         AppController appController = (AppController) getApplicationContext();
         appController.setFirebaseToken(FirebaseInstanceId.getInstance().getToken());
-
+        //TODO Webservice Post request: Token
     }
 
 

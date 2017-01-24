@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "194134930539",
+    "firebase_url": "https://mensabuddy.firebaseio.com",
+    "project_id": "mensabuddy",
+    "storage_bucket": "mensabuddy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194134930539:android:551b004b64ba05fd",
+        "android_client_info": {
+          "package_name": "com.dev.app.mensabuddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194134930539-q58cjk9srjtf90jk5233ik0toog0o16k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev.app.mensabuddy",
+            "certificate_hash": "1F39BAE108017FCBC748029A79A151D6F86B3E9E"
+          }
+        },
+        {
+          "client_id": "194134930539-k4ero069nio941v3fcegkpbjacubvf89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCButLyTeuNbQ_gt4WfWfrH6ANCv4VCkaA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194134930539-k4ero069nio941v3fcegkpbjacubvf89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
