@@ -207,11 +207,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(VORSCHLAG_CONF1_COL, vorschlag.getConf1());
         contentValues.put(VORSCHLAG_CONF2_COL, vorschlag.getConf2());
         contentValues.put(VORSCHLAG_PROZENT_COL, vorschlag.getProzent());
-        contentValues.put(VORSCHLAG_ZEIT_COL, vorschlag.getProzent());
+        contentValues.put(VORSCHLAG_ZEIT_COL, vorschlag.getZeit());
         long result = db.insert(VORSCHLAG_TABLE_NAME, null, contentValues);
         if (result == -1) {
             return false;
         }
+        Log.d(TAG, "insertVorschlag: Erfolreich");
         return true;
     }
 
@@ -236,15 +237,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Vorschlag getVorschlag() {
         SQLiteDatabase db = this.getWritableDatabase();
         Vorschlag vorschlag = new Vorschlag();
-        Cursor result = db.rawQuery("SELECT * FROM " + VORSCHLAG_TABLE_NAME, null);
+        Cursor result = db.rawQuery("SELECT * FROM " + VORSCHLAG_TABLE_NAME + " ORDER BY " + VORSCHLAG_ID_COL + " DESC", null);
 
         if (result.moveToNext()) {
 
             if (result.getInt(0) > 0) {
                 Log.d(TAG, "getVorschlag: Result > 0");
                 vorschlag.setId(result.getInt(0));
-                vorschlag.setMensa(result.getString(1));
-                vorschlag.setEigeneId(result.getInt(2));
+                vorschlag.setEigeneId(result.getInt(1));
+                vorschlag.setMensa(result.getString(2));
                 vorschlag.setStartzeit1(result.getString(3));
                 vorschlag.setStartzeit2(result.getString(4));
                 vorschlag.setDatum(result.getString(5));
@@ -262,6 +263,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return vorschlag;
+    }
+
+    public void deleteVorschlag() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+ VORSCHLAG_TABLE_NAME);
     }
 
 }

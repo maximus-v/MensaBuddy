@@ -38,6 +38,8 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.7.3'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.7.3'
 
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+
     testCompile 'junit:junit:4.12'
 }
 

@@ -80,6 +80,7 @@ public class MatchingActivity extends AppCompatActivity {
                             vorschlag.setAndereId(response.getInt("matchedUserId"));
                             vorschlag.setProzent(response.getInt("percentage"));
                             vorschlag.setTelefon(response.getString("telefon"));
+                            Log.d(TAG, "onResponse: " + response.getString("zeit"));
                             vorschlag.setZeit(response.getString("zeit"));
                             vorschlag.setMensa(appController.getMensa());
                             vorschlag.setEigeneId(appController.getId());
@@ -90,13 +91,11 @@ public class MatchingActivity extends AppCompatActivity {
                             vorschlag.setConf2(0);
 
                             if (vorschlag.getId() != 0) {
-                                //Starte neue Aktivität
                                 //Schreibe in Datenbank
+                                Log.d(TAG, "onResponse: Schreibe in Datenbank");
+                                myDb.insertVorschlag(vorschlag);
+                                //Starte neue Aktivität
                                 Intent i = new Intent(getApplicationContext(), MatchPresentationActivity.class);
-                                i.putExtra("MensaName", vorschlag.getMensa());
-                                i.putExtra("Name", vorschlag.getName());
-                                i.putExtra("Zeit", vorschlag.getZeit());
-                                i.putExtra("Telefon", vorschlag.getTelefon());
                                 startActivity(i);
                             } else {
                                 message.setVisibility(View.VISIBLE);

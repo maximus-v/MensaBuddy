@@ -78,6 +78,16 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
             appController.setId(id);
         }
 
+        //Vorerst
+        myDb.deleteVorschlag();
+
+        //Nachfolgender Code leitet User zu evtl bestehendem Match
+        /*int matchId = myDb.getVorschlag().getId();
+        if (matchId > 0) {
+            Intent i = new Intent(getApplicationContext(), MatchPresentationActivity.class);
+            startActivity(i);
+        }*/
+
         /*
         String favortienMensa = "Zeltmensa";
         //Lösche Mensa von übrigen Mensen
