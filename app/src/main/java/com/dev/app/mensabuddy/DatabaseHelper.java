@@ -217,6 +217,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean updateVorschlag(Vorschlag vorschlag) {
+        Log.d(TAG, "updateVorschlag: Es wird geupdated");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(VORSCHLAG_ID_COL, vorschlag.getId());
