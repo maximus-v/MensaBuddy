@@ -79,14 +79,6 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
         }
 
         /*
-        //Hier könnte Ihre ArrayList stehen
-        ArrayList<String> items = new ArrayList<>();
-        items.add("Alte Mensa");
-        items.add("GrillCube");
-        items.add("Reichenbachstrasse");
-        items.add("Siedepunkt");
-        items.add("UBoot");
-        items.add("Zeltmensa");
         String favortienMensa = "Zeltmensa";
         //Lösche Mensa von übrigen Mensen
         if (items.indexOf(favortienMensa) != 0) {
@@ -99,9 +91,6 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
             items.remove(0);
             items.add(0, favortienMensa);
         }
-        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        ListView listView = (ListView) findViewById(R.id.mensa_list);
-        listView.setAdapter(itemsAdapter);
         */
 
         //Google API
