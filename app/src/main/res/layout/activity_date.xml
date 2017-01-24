@@ -10,31 +10,30 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.dev.app.mensabuddy.DateActivity">
 
-    <TimePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:id="@+id/timePicker"
-        android:layout_alignParentTop="true" />
-
-    <Button
-        android:text="Matching starten"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/timePicker"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:id="@+id/timeBtn" />
-
     <TextView
-        android:text="Wähle die Uhrzeit, zu der du mensen möchtest."
+        android:text="Ab wann hast du heute Zeit?"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp"
-        android:id="@+id/textView2" />
+        android:layout_marginTop="12dp" />
+
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:id="@+id/timePicker1"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:text="Weiter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timePicker1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/timeBtn1" />
 
 </RelativeLayout>

@@ -1,48 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_matching"
+    android:id="@+id/activity_date"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.dev.app.mensabuddy.MatchingActivity">
+    tools:context="com.dev.app.mensabuddy.DateActivity">
 
     <TextView
-        android:text="TextView"
+        android:text="Bis wann kannst du?"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/matchText1" />
+        android:layout_marginTop="12dp" />
 
-    <TextView
-        android:text="TextView"
+    <TimePicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/matchText1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/matchText2" />
+        android:layout_marginTop="52dp"
+        android:id="@+id/timePicker2"
+        android:layout_alignParentTop="true" />
 
-    <TextView
-        android:text="TextView"
+    <Button
+        android:text="Matching starten"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/matchText2"
+        android:layout_below="@+id/timePicker2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/matchText3" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/matchText3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/matchText4" />
+        android:layout_marginTop="20dp"
+        android:id="@+id/timeBtn2" />
 
 </RelativeLayout>
