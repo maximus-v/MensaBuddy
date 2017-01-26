@@ -9,16 +9,20 @@ import static com.dev.app.mensabuddy.StartActivity.TAG;
 
 /**
  * Created by chris on 22.01.2017.
+ * gets called on Startup of Application an generates an new FirebaseToken if necessary
  */
 
 public class FirebaseIDService extends FirebaseInstanceIdService{
 
 
-    public void getToken(){
+    //returns current FirebaseToken
+    public String getToken(){
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Refreshed token: " + refreshedToken);
+        return refreshedToken;
     }
 
+    //gets calles when new Token is generated
     @Override
     public void onTokenRefresh(){
         // Get updated InstanceID token.

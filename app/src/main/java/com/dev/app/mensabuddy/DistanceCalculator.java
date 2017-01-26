@@ -1,5 +1,7 @@
 package com.dev.app.mensabuddy;
 
+//calculates distance from given Location to different canteens
+
 import com.dev.app.mensabuddy.Entities.Mensa;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class DistanceCalculator {
 
     public DistanceCalculator (){
 
+        //coordniates of Dresden canteens
         canteens.put("Alte MensaLat", 51.027199);
         canteens.put("Alte MensaLng", 13.726550);
         canteens.put("ZeltschlösschenLat", 51.031318);
@@ -31,6 +34,7 @@ public class DistanceCalculator {
         canteens.put("UBootLng", 13.729224);
     }
 
+    //calculates distance between two different given locations
     public double calculateDistance (double lat1,double lat2,double long1,double long2){
         double Lat1=this.convert(lat1*(-1));
         double Lat2=this.convert(lat2*(-1));
@@ -40,11 +44,13 @@ public class DistanceCalculator {
         return distance;
     }
 
+    //converts into km?
     private double convert(double wert)
     {
         return wert*(2*3.14159265359/360);
     }
 
+    //calculates distance of each canteen to given location
     private String[] sortCanteens(Double lat, Double lng){
         List result = new ArrayList();
         Mensa alteMensa = new Mensa("Alte Mensa");
@@ -76,12 +82,14 @@ public class DistanceCalculator {
         return ergebnis;
     }
 
+    //returns Mensa next to given location
     public String getNextMensa(Double lat, Double lng){
         this.sortCanteens(lat, lng);
         return ergebnis[0];
 
     }
 
+    //returns list of canteens, sorted by distance to given location
     public String[] getSortedCanteens(Double lat, Double lng){
         return this.sortCanteens(lat, lng);
     }

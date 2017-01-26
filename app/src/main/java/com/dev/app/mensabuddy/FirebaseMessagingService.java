@@ -20,17 +20,24 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     public FirebaseMessagingService() {
     }
 
+    //gets called when message is coming in while App is running
+    //creates PushNotification with FirebaseMessageContent
     @Override
     public void onMessageReceived(RemoteMessage Message){
-        //gets called when message is coming in while App is in foreground
+
 
         Log.d(TAG, "Firebase Massage received from: " + Message.getFrom() + "Please check Matches!");
+        try { Log.d(TAG, "Message:"+Message.getTtl());
+
+        } catch (Exception e){
+            Log.d(TAG, "Didn't get notification because: "+e.getMessage());
+        }
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.notification_icon)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!");
+                        .setContentTitle("Mensa Buddy")
+                        .setContentText("You've got a new Match - Check it out now!");
 
         Intent resultIntent = new Intent(this, MatchingActivity.class);
 

@@ -50,7 +50,7 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
     DatabaseHelper myDb;
     AppController appController;
     private GoogleApiClient mGoogleApiClient;
-    public static final String TAG = StartMatchingActivity.class.getSimpleName();
+    public static final String TAG = StartActivity.class.getSimpleName();
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private DistanceCalculator DC = new DistanceCalculator();
     private ArrayList<MensaModel> mensaModels = new ArrayList<>();
@@ -62,6 +62,7 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
         setContentView(R.layout.activity_start);
 
         FirebaseIDService Service = new FirebaseIDService();
+
         Service.getToken();
 
 
@@ -76,6 +77,8 @@ public class StartActivity extends AppCompatActivity implements GoogleApiClient.
             startActivity(i);
         } else {
             appController.setId(id);
+            // Update FirebaseToken in Backend
+            Service.getToken();
         }
 
         //Vorerst

@@ -24,15 +24,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".StartMatchingActivity"
-            android:label="@string/title_activity_start_matching">
-            <intent-filter>
-                <action android:name="android.intent.action.ASSIST" />
-
-                <category android:name="android.intent.category.MONKEY" />
-            </intent-filter>
-        </activity>
         <activity android:name=".DateActivity" />
         <activity android:name=".PersonalActivity" />
         <activity android:name=".MatchingActivity" />
